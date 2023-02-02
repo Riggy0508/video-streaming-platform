@@ -13,9 +13,21 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/start.html');
 });
 
+let connectedPeers = [];
+
 io.on('connection', (socket) => {
-  console.log('User Connected to socket server');
-  console.log(socket.id);
+  connectedPeers.push(socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected');
+
+    const newConnectedPeers = connectedPeers.filter((peerSocketId) => {
+      return peerSocketId !== socket.id;
+    });
+
+    connectedPeers = newConnectedPeers;
+    console.log(connectedPeers);
+  });
 });
 
 server.listen(PORT, () => {
