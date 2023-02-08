@@ -17,6 +17,8 @@ let connectedPeers = [];
 
 io.on('connection', (socket) => {
   connectedPeers.push(socket.id);
+  console.log("user Connected")
+  console.log(connectedPeers)
 
   socket.on('disconnect', () => {
     console.log('User Disconnected');
