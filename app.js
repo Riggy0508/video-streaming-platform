@@ -17,8 +17,13 @@ let connectedPeers = [];
 
 io.on('connection', (socket) => {
   connectedPeers.push(socket.id);
-  console.log("user Connected")
-  console.log(connectedPeers)
+  console.log('user Connected');
+  console.log(connectedPeers);
+
+  socket.on('pre-offer', (data) => {
+    console.log('Pre-Offer-came');
+    console.log(data);
+  });
 
   socket.on('disconnect', () => {
     console.log('User Disconnected');
