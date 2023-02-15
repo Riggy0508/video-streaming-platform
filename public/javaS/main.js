@@ -2,6 +2,8 @@ import * as store from './store.js';
 import * as wss from './wss.js';
 import * as webRTCHandler from './handlerWebRTC.js';
 import * as constants from './constant.js';
+//import { getIncomingCallDialog } from './elements.js';
+
 //Here we are initializtion the SOcketID Connection
 const socket = io('/');
 wss.registerSocketEvents(socket);
@@ -37,7 +39,15 @@ personalCodeChatButton.addEventListener('click', () => {
 
 personalCodeVideoButton.addEventListener('click', () => {
   console.log('Video Button Clicked');
-  const calleePersonCode = document.getElementById('personal_code_input').value;
+  const calleePersonalCode = document.getElementById(
+    'personal_code_input'
+  ).value;
   const callType = constants.callType.VIDEO_PERSONAL_CODE;
-  webRTCHandler.sendPreOffer(callType, calleePersonCode);
+  webRTCHandler.sendPreOffer(callType, calleePersonalCode);
 });
+
+// getIncomingCallDialog(
+//   'Video',
+//   () => {},
+//   () => {}
+// );
